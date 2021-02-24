@@ -4,6 +4,8 @@ using static Core.Utilities.Interceptors.Class1;
 
 namespace Core.Utilities.Interceptors
 {
+    //invocation : Business method
+    //Aspect kodları ezmeye yarayan içinde onu içeren operasyon
     public abstract class MethodInterception : MethodInterceptionBaseAttribute
     {
         protected virtual void OnBefore(IInvocation invocation) { }
