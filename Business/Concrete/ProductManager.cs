@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -30,6 +31,8 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
         //Bir entity manager(ProductManager) kendisi hariç başka dalı enjekte edemez...!!!!!!
+        //Claim = Iddia etmek
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
@@ -39,7 +42,7 @@ namespace Business.Concrete
             //{
             //    return new ErrorResult(Messages.ProductCountOfCategoryError);
             //}
-            //validation = Girilen ürün bilgilerini yapısal olarak yazma      
+            //validation = Girilen ürün bilgilerini yapısal olarak yazma
             //İş Kodları = Business codes
 
             IResult result = BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
